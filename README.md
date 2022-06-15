@@ -9,5 +9,5 @@
   npm i express
   npm start
   
-  goto localhost:3000
+  goto localhost:3000 in your browser
 ```

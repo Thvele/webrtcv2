@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
-    <title>Lobby</title>
+    <title>Главная</title>
     <link rel="stylesheet" type="text/css" href="style.css" />
     <script src="https://muazkhan.com:9001/dist/RTCMultiConnection.min.js"></script>
     <script src="https://muazkhan.com:9001/socket.io/socket.io.js"></script>
@@ -28,7 +28,7 @@
       <div class="main" style="flex: 1;  background-image: url(https://images3.alphacoders.com/109/1098594.jpg); background-color: #001a29; background-size:cover; height: 92vh;"> 
         <form class="table" id="theForm" action="/join_room">
         <div class="col-3" >
-            <input class="effect-3" type="text" id="input-roomid" name="input_roomid" placeholder="Room ID" required autocomplete="off">
+            <input class="effect-3" type="text" id="input-roomid" name="input_roomid" placeholder="ID комнаты" autocomplete="off" maxlength="40">
             <span class="focus-border"></span>
         </div>
         <div class="col-3-after">
