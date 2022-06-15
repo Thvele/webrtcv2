@@ -21,11 +21,20 @@ connection.sdpConstraints.mandatory = {
     OfferToReceiveVideo: true // Запрос на использование камеры
 };
 
+connection.onmute = function (e) {
+    if (e.type === 'local') {
+        e.mediaElement.setAttribute('poster', 'nocam.jpg')
+    }
+    if (e.type === 'remote') {
+        e.mediaElement.setAttribute('poster', 'nocam.jpg')
+    }
+}
+
 // Объявление переменных, для хранения ID комнаты и пользователя
 var roomid = "";
 var user = connection.userid;
 
-function OnLoad() { // Действия при загрузке страницы
+function OnLoad() { // Действия при загрузке страницы+
     var paramValue = window.location.href.split("?")[1].split("=")[1];
     if (paramValue == '') {
         roomid = connection.token();
@@ -53,6 +62,7 @@ var videoGrid = document.getElementById('video-grid'); // Поиск элеме�
 connection.onstream = function (event) { // Создание элемента, в котором будет отображаться видео с камеры пользователя
     var video = event.mediaElement;
     video.controls = false;
+    video.setAttribute('pip', 'false')
     videoGrid.appendChild(video);
 };
 
@@ -96,6 +106,10 @@ stopVideo.addEventListener("click", () => { // Добавление собити
         } else {
             localVideoMute = false;
             localStream.unmute('video');
+
+            if(!localAudioMute)
+                localStream.unmute('audio');
+
             connection.streamEvents.selectFirst('local').mediaElement.muted = true;
             html = `<i class="fas fa-video"></i>`;
             stopVideo.classList.toggle("background__red");
@@ -172,7 +186,7 @@ send.addEventListener("click", (e) => { // Добавление собития �
 function OnSendMessage() { // Функция отправки сообщения
     let text = document.querySelector("#chat_message");
 
-    if (text.value.replace(/\s+/g,"").length !== 0) {
+    if (text.value.replace(/\s+/g, "").length !== 0) {
         connection.session.data = true;
         connection.send(text.value);
 
@@ -187,8 +201,7 @@ function OnSendMessage() { // Функция отправки сообщения
         var element = $("#chat_message").emojioneArea();
         element[0].emojioneArea.setText('');
     }
-    else
-    {
+    else {
         var element = $("#chat_message").emojioneArea();
         element[0].emojioneArea.setText('');
     }
