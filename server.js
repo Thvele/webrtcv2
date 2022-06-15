@@ -1,3 +1,4 @@
+const { Console } = require('console');
 const express = require('express');
 const app = express(); //Создание объекта для управления приложением
 const server = require('http').Server(app); //Создание сервера
@@ -13,4 +14,7 @@ app.get('/join_room', (req,res) => {
     res.render('index.ejs',{roomID: req.params}) // Загрузка страницы звонка
 });
 
-server.listen(3000); // Запуск сервера на порте 3000
+var port = 3000;
+
+server.listen(port); // Запуск сервера на порте 3000
+console.log('Сервер запущен на порте: ', port)
